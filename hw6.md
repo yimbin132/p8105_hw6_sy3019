@@ -79,9 +79,6 @@ victims to female victims. Do this within a “tidy” pipeline, making use
 of purrr::map, list columns, and unnest as necessary to create a
 dataframe with estimated ORs and CIs for each city.
 
-Create a plot that shows the estimated ORs and CIs for each city.
-Organize cities according to estimated OR, and comment on the plot.
-
 ``` r
 city_glm = 
   homicide_df %>%
@@ -100,6 +97,24 @@ city_glm =
   ) %>%
    select(city_state, OR, LCL, UCL)
 ```
+
+Create a plot that shows the estimated ORs and CIs for each city.
+Organize cities according to estimated OR, and comment on the plot.
+
+``` r
+city_glm %>% 
+  ggplot(aes(reorder(city_state, OR), OR)) + 
+  geom_point(aes(color = city_state)) + 
+  geom_errorbar(aes(ymin = LCL, ymax = UCL)) +
+   labs(
+    title = "Problem 2, plot of Adjusted OR and CI for solving homicides comparing male victims to female victims In each city ",
+    x = "City, State",
+    y = "Adjusted OR") +
+   theme(axis.text.x = element_text(angle = 90),
+         legend.position = "none")
+```
+
+<img src="hw6_files/figure-gfm/unnamed-chunk-5-1.png" width="90%" />
 
 Problem 3 In this problem, you will analyze data gathered to understand
 the effects of several variables on a child’s birthweight. This dataset,
