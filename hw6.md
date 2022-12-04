@@ -237,7 +237,7 @@ birth_wt %>%
   ggplot(aes(x = bwt)) + 
   geom_histogram(binwidth = 25) + 
   labs(
-    title = "Checking Assumption", x = "Birthweight (g)",y = "Count"
+    title = "Disbribution of birthweight (g)", x = "Birthweight (g)",y = "Count"
   )
 ```
 
@@ -307,6 +307,15 @@ reduced_model =
     bwt ~ babysex + bhead + blength + delwt+ gaweeks +  mheight + mrace + smoken + ppwt,
     data = birth_wt
   )
+
+birth_wt %>% 
+  add_predictions(reduced_model) %>% 
+  ggplot(aes(x = pred)) + geom_density() 
+```
+
+<img src="hw6_files/figure-gfm/unnamed-chunk-10-1.png" width="90%" />
+
+``` r
 birth_wt %>% 
   add_predictions(reduced_model) %>% 
   add_residuals(reduced_model) %>% 
@@ -319,13 +328,14 @@ birth_wt %>%
   )
 ```
 
-<img src="hw6_files/figure-gfm/unnamed-chunk-10-1.png" width="90%" />
+<img src="hw6_files/figure-gfm/unnamed-chunk-10-2.png" width="90%" />
 
-Based on the plot created, the homoscedasticity assumptions seems to be
-violated. Also, the there are some notable outliers. To resolve these
-issues, few things can be done. We can include creating a formal rule
-for the exclusion of outliers, or fitting a model that is robust to
-outliers.
+Based on the plots created, the distribution of predictions is
+left-skewed, the homoscedasticity assumptions seems to be violated.
+Also, the there are some notable outliers. To resolve these issues, few
+things can be done. We can include creating a formal rule for the
+exclusion of outliers, transforming the variable (e.g. using a log
+transformation), or fitting a model that is robust to outliers.
 
 Compare your model to two others:
 
