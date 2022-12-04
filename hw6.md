@@ -3,6 +3,48 @@ HW6
 Soungbin Yim
 2022-11-29
 
+### Due date
+
+Due: December 3 at 11:59pm.
+
+### Points
+
+| Problem   | Points |
+|:----------|:-------|
+| Problem 0 | 20     |
+| Problem 1 | –      |
+| Problem 2 | 40     |
+| Problem 3 | 40     |
+
+### Problem 0
+
+This “problem” focuses on structure of your assignment, including the
+use of R Markdown to write reproducible reports, the use of R Projects
+to organize your work, the use of relative paths to load data, and the
+naming structure for your files.
+
+To that end:
+
+- create a public GitHub repo + local R Project for this assignment
+- write solutions using a .Rmd file that outputs a `github_document` /
+  .md file
+- submit a link to your repo via Courseworks
+
+Your solutions to Problems 1 and 2 should be implemented in your .Rmd
+file, and your git commit history should reflect the process you used to
+solve these Problems.
+
+For Problem 0, we will assess adherence to the instructions above
+regarding repo structure, git commit history, and whether we are able to
+knit your .Rmd to ensure that your work is reproducible. Adherence to
+appropriate styling and clarity of code will be assessed in Problems 1+
+using the homework [style rubric](homework_style_rubric.html).
+
+This homework includes figures; the readability of your embedded plots
+(e.g. font sizes, axis labels, titles) will be assessed in Problems 1+.
+
+## Problem 1
+
 ## Problem 2
 
 The Washington Post has gathered data on homicides in 50 large U.S.
@@ -75,25 +117,11 @@ fit_logistic %>%
 | victim_raceBlack | -0.842 | 0.431 | 0.306 | 0.607 |
 | victim_sexMale   | -0.854 | 0.426 | 0.325 | 0.558 |
 
-``` r
-baltimore_df
-```
-
-    ## # A tibble: 2,753 × 4
-    ##    resolved victim_age victim_race victim_sex
-    ##       <dbl>      <dbl> <fct>       <chr>     
-    ##  1        0         17 Black       Male      
-    ##  2        0         26 Black       Male      
-    ##  3        0         21 Black       Male      
-    ##  4        1         61 White       Male      
-    ##  5        1         46 Black       Male      
-    ##  6        1         27 Black       Male      
-    ##  7        1         21 Black       Male      
-    ##  8        1         16 Black       Male      
-    ##  9        1         21 Black       Male      
-    ## 10        1         44 Black       Female    
-    ## # … with 2,743 more rows
-    ## # ℹ Use `print(n = ...)` to see more rows
+Based on the table, the estimated odds ratio of having homicide solved
+between male and female victims is 0.426, adjusting for victim age and
+race, in Baltimore, MD. We are 95% confident that the true odds ratio of
+having homicide solved between male and female victims lies between
+0.325 and 0.558, adjusting for victim age and race, in Baltimore, MD.
 
 Now run glm for each of the cities in your dataset, and extract the
 adjusted odds ratio (and CI) for solving homicides comparing male
@@ -137,6 +165,12 @@ city_glm %>%
 ```
 
 <img src="hw6_files/figure-gfm/unnamed-chunk-5-1.png" width="90%" />
+
+Based on the plot, we can see the majority of adjusted ORs have their
+values and upper CI below 1, meaning most of cities’ male victims have
+smaller odds of solved homicide case than females. Many of ORs in the
+plot do not contain the null value of 1, meaning they are not
+significant.
 
 ## Problem 3
 
@@ -215,7 +249,7 @@ I decided to exclude ‘pnumlbw’ and ‘pnumgsa’ ‘malform’ and ‘parity
 because they all have no observation or almost no observation, and
 ‘ppbmi’ because I decided to use ‘ppwt’ instead.
 
-#### building the full model
+#### Building the full model
 
 ``` r
 full_model = 
